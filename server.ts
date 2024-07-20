@@ -1,7 +1,5 @@
 import app from "./src/app";
 
-app.listen(process.env.PORT, () => {
-  console.log(
-    "Aplicação rodando"
-  );
+app.listen(process.env.WCPORT, () => {
+  console.log("Aplicação rodando");
 });

@@ -1,15 +1,16 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
+import User from "../entities/User";
 
 dotenv.config();
 
 export const database = new DataSource({
   type: "mysql",
-  host: process.env.DB_HOST,
+  host: process.env.WCDB_HOST,
   port: 3306,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  entities: [],
+  username: process.env.WCDB_USERNAME,
+  password: process.env.WCDB_PASSWORD,
+  database: process.env.WCDB_NAME,
+  entities: [User],
   migrations: [`${__dirname}/../migrations/*.{ts,js}`],
 });

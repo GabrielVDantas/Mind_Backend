@@ -1,4 +1,5 @@
-import { Column, Entity, Long, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Long, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Transaction from "./Transaction";
 
 @Entity("users")
 class User {
@@ -16,6 +17,9 @@ class User {
 
   @Column({nullable: false, type: 'longblob'})
   avatar: Buffer;
+
+  @OneToMany(() => Transaction, transaction => transaction.user)
+  transactions: Transaction[];
 }
 
 export default User;

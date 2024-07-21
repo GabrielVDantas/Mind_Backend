@@ -1,6 +1,6 @@
 import { Router } from "express";
 import upload from "../middleware/multerMiddleware";
-import AuthController from "../controller/authController";
+import AuthController from "../controller/UserController/authController";
 
 const userRoutes = Router();
 

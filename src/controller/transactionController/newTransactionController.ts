@@ -7,11 +7,11 @@ class NewTransactionController {
     const userId = req.user.id as Long;
     const { description, amount } = req.body;
     try {
-      const registeredUser =
+      const newTransaction =
         await NewTransactionService.newTransactionService(userId, description, amount);
       res.status(201).json({
         message: "Transação registrada com sucesso!",
-        transaction: registeredUser,
+        transaction: newTransaction,
       });
     } catch (error) {
       res

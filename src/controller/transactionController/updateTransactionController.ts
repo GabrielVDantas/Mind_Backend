@@ -23,7 +23,7 @@ class UpdateTransactionController {
     } catch (error) {
       res
         .status(500)
-        .json({ message: `${error} - Transação não serão atualizada!` });
+        .json({ message: `${error} - Transação não será atualizada!` });
     }
   }
 }

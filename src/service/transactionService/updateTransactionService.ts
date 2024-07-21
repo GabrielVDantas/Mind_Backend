@@ -15,9 +15,15 @@ class UpdateTransactionService {
     const transaction = await transactionRepository.findOne({
       where: { id: transactionId, user: user },
     }) as Transaction;
-    about === "description"
-      ? (transaction.description = String(data))
-      : (transaction.amount = Number(data));
+    if (about === "description") {
+      transaction.description = String(data);
+    } else if (about === "amount") {
+      const oldAmount = transaction.amount;
+      const newAmount = Number(data);
+      transaction.amount = newAmount;
+      user.currentBalance += newAmount - oldAmount;
+      await userRepository.save(user);
+    }
     return transactionRepository.save(transaction);
   }
 }

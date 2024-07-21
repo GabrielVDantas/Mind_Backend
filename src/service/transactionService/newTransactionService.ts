@@ -11,6 +11,8 @@ class NewTransactionService {
       amount,
       user
     });
+    user.currentBalance += amount;
+    await userRepository.save(user);
     return await transactionRepository.save(newTransaction);
   }
 }

@@ -18,6 +18,9 @@ class User {
   @Column({nullable: false, type: 'longblob'})
   avatar: Buffer;
 
+  @Column({ type: "decimal", precision: 7, scale: 2, default: 0, name: "current_balance" })
+  currentBalance: number;
+
   @OneToMany(() => Transaction, transaction => transaction.user)
   transactions: Transaction[];
 }

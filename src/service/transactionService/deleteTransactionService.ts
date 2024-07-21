@@ -10,6 +10,8 @@ class DeleteTransactionService {
     const transaction = await transactionRepository.findOne({
       where: { id: transactionId, user: user },
     }) as Transaction;
+    user.currentBalance -= transaction.amount;
+    await userRepository.save(user);
     await transactionRepository.delete(transaction);
   }
 }

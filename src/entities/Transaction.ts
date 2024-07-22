@@ -6,6 +6,7 @@ import {
   Long,
   OneToMany,
   JoinColumn,
+  ManyToOne,
 } from "typeorm";
 import User from "./User";
 
@@ -23,7 +24,7 @@ class Transaction {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => User, (user) => user.transactions)
+  @ManyToOne(() => User, (user) => user.transactions)
   @JoinColumn({ name: "user_id" })
   user: User;
 }

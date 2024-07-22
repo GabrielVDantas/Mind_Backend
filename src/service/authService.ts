@@ -11,27 +11,19 @@ class AuthService {
     avatar: Buffer
   ) {
     const existingUser = (await userRepository.findOneBy({ email })) as User;
-    if (existingUser)
+    if (existingUser) {
       throw new Error("Já existe um usuário com essas informações");
-
+    }
     const encodedPassword = await PasswordService.encodePassword(password);
-
     const newUser = userRepository.create({
       username,
       email,
       password: encodedPassword,
       avatar,
     });
+
     await userRepository.save(newUser);
-    const {
-      password: removedPassword,
-      avatar: removedAvatar,
-      ...registeredUserWithoutAvatar
-    } = newUser;
-    return {
-      registeredUserWithoutAvatar,
-      avatar: ImageService.convertBufferToBase64(newUser.avatar),
-    };
+    return newUser;
   }
 
   static async loginService(email: string, password: string) {
@@ -40,9 +32,8 @@ class AuthService {
       throw new Error("Não existe um usuário com essas informações");
 
     const compareResult = await PasswordService.comparePasswords(
-      existingUser.password,
-      password
-    );
+      password, existingUser.password
+    );    
     if (!compareResult) throw new Error("Dados incorretos!");
     const token = await TokenService.generateToken(existingUser.id);
 

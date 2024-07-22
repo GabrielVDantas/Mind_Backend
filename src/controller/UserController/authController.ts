@@ -5,7 +5,6 @@ class AuthController {
   static async registerController(req: Request, res: Response) {
     const { username, email, password } = req.body;
     const avatar = req.file!.buffer;
-
     try {
       const registeredUser = await AuthService.registerService(
         username,
@@ -36,6 +35,10 @@ class AuthController {
     } catch (error) {
       res.status(500).json({ message: `${error} - Usuário não será logado!` });
     }
+  }
+
+  static getUserTokenData(req: Request, res: Response) {
+    return res.json(req.user);
   }
 }
 

@@ -5,8 +5,8 @@ class PasswordService {
         return await bcrypt.hash(password, 10);
     }
 
-    static async comparePasswords(encodedPassword: string, password: string) {
-        return await bcrypt.compare(encodedPassword, password);
+    static async comparePasswords(password: string, encodedPassword: string) {
+        return await bcrypt.compare(password, encodedPassword);
     }
 }
 

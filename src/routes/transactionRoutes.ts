@@ -15,7 +15,7 @@ transactionRoutes.post(
 );
 
 transactionRoutes.get(
-  "/my-transactions",
+  "/feed",
   GetTransactionsController.getTransactionsController
 );
 

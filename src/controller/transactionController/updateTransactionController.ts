@@ -6,15 +6,17 @@ class UpdateTransactionController {
   static async updateTransactionController(req: Request, res: Response) {
     const userId = req.user.id as Long;
     const { transactionId } = req.params;
-    const { amount, description } = req.body;
-    const transactionIdAsLong = transactionId as unknown as Long;    
+    const { amount, description, category } = req.body;
+    const transactionIdAsLong = transactionId as unknown as Long;
+       
     try {
       const updatedTransaction =
         await UpdateTransactionService.updateTransactionService(
           userId,
           transactionIdAsLong,
           amount,
-          description
+          description,
+          category
         );
       res.json({
         message: "Transação atualizada com sucesso!",

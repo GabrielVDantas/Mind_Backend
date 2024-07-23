@@ -4,10 +4,8 @@ import {
   Column,
   CreateDateColumn,
   Long,
-  OneToMany,
   JoinColumn,
   ManyToOne,
-  ManyToMany,
 } from "typeorm";
 import User from "./User";
 import Category from "./Category";

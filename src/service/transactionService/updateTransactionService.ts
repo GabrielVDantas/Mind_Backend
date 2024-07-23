@@ -3,6 +3,8 @@ import userRepository from "../../repositories/userRepository";
 import User from "../../entities/User";
 import transactionRepository from "../../repositories/transactionRepository";
 import Transaction from "../../entities/Transaction";
+import categoryRepository from "../../repositories/categoryRepository";
+import Category from "../../entities/Category";
 
 class UpdateTransactionService {
   static async updateTransactionService(
@@ -10,6 +12,7 @@ class UpdateTransactionService {
     transactionId: Long,
     amount: number,
     description: string,
+    category: string
   ) {  
     const user = await userRepository.findOneBy({ id: userId }) as User;
     const transaction = await transactionRepository.findOne({
@@ -20,8 +23,11 @@ class UpdateTransactionService {
     transaction.description = description;
     user.currentBalance = parseFloat(user.currentBalance.toString()) + parseFloat(amount.toString());
     await userRepository.save(user);
+    const dbCategory = await categoryRepository.findOneBy({name: category}) as Category;    
+    transaction.category = dbCategory;
+    const transactionUpdated = await transactionRepository.save(transaction);
+    return transactionUpdated;
     
-    return await transactionRepository.save(transaction);
   }
 }
 

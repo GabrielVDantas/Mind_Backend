@@ -6,10 +6,9 @@ class DeleteTransactionController {
   static async deleteTransactionController(req: Request, res: Response) {
     const userId = req.user.id as Long;
     const { transactionId } = req.params;
-
+    const transactionIdAsLong = transactionId as unknown as Long;
+    
     try {
-      const transactionIdAsLong = Long.fromString(transactionId);
-
       await DeleteTransactionService.deleteTransactionService(
         userId,
         transactionIdAsLong

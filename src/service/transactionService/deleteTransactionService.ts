@@ -12,7 +12,7 @@ class DeleteTransactionService {
     }) as Transaction;
     user.currentBalance = parseFloat(user.currentBalance.toString()) - transaction.amount;
     await userRepository.save(user);
-    await transactionRepository.delete(transaction);
+    return await transactionRepository.delete({id: transaction.id});    
   }
 }
 

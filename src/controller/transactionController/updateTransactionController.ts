@@ -7,8 +7,8 @@ class UpdateTransactionController {
     const userId = req.user.id as Long;
     const { transactionId } = req.params;
     const { amount, description } = req.body;
+    const transactionIdAsLong = transactionId as unknown as Long;    
     try {
-      const transactionIdAsLong = Long.fromString(transactionId);
       const updatedTransaction =
         await UpdateTransactionService.updateTransactionService(
           userId,

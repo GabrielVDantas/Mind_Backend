@@ -8,22 +8,18 @@ class UpdateTransactionService {
   static async updateTransactionService(
     userId: Long,
     transactionId: Long,
-    about: string,
-    data: unknown,
+    amount: number,
+    description: string,
   ) {
     const user = await userRepository.findOneBy({ id: userId }) as User;
     const transaction = await transactionRepository.findOne({
       where: { id: transactionId, user: user },
     }) as Transaction;
-    if (about === "description") {
-      transaction.description = String(data);
-    } else if (about === "amount") {
-      const oldAmount = transaction.amount;
-      const newAmount = Number(data);
-      transaction.amount = newAmount;
-      user.currentBalance += newAmount - oldAmount;
-      await userRepository.save(user);
-    }
+    user.currentBalance = parseFloat(user.currentBalance.toString()) - transaction.amount;
+    transaction.amount = amount;
+    transaction.description = description;
+    user.currentBalance = parseFloat(user.currentBalance.toString()) + amount;
+    await userRepository.save(user);
     return transactionRepository.save(transaction);
   }
 }

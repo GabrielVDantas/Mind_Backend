@@ -5,12 +5,14 @@ import DeleteTransactionService from "../../service/transactionService/deleteTra
 class DeleteTransactionController {
   static async deleteTransactionController(req: Request, res: Response) {
     const userId = req.user.id as Long;
-    const { transactionId } = req.body;
+    const { transactionId } = req.params;
 
     try {
+      const transactionIdAsLong = Long.fromString(transactionId);
+
       await DeleteTransactionService.deleteTransactionService(
         userId,
-        transactionId
+        transactionIdAsLong
       );
       res.status(204).json({
         message: "Transação deletada com sucesso!",

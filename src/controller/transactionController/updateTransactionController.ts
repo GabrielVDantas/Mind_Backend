@@ -5,16 +5,16 @@ import UpdateTransactionService from "../../service/transactionService/updateTra
 class UpdateTransactionController {
   static async updateTransactionController(req: Request, res: Response) {
     const userId = req.user.id as Long;
-    const about = req.params.about;
-    const data = req.body[about] as unknown;
-    const { transactionId } = req.body;
+    const { transactionId } = req.params;
+    const { amount, description } = req.body;
     try {
+      const transactionIdAsLong = Long.fromString(transactionId);
       const updatedTransaction =
         await UpdateTransactionService.updateTransactionService(
           userId,
-          transactionId,
-          about,
-          data,
+          transactionIdAsLong,
+          amount,
+          description
         );
       res.json({
         message: "Transação atualizada com sucesso!",

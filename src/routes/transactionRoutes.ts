@@ -20,12 +20,12 @@ transactionRoutes.get(
 );
 
 transactionRoutes.put(
-  "/update-transaction-:about",
+  "/update-transaction/:transactionId",
   UpdateTransactionController.updateTransactionController
 );
 
 transactionRoutes.delete(
-  "/delete-transaction",
+  "/delete-transaction/:transactionId",
   DeleteTransactionController.deleteTransactionController
 );
 

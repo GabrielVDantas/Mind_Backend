@@ -6,13 +6,14 @@ class UpdateTransactionController {
   static async updateTransactionController(req: Request, res: Response) {
     const userId = req.user.id as Long;
     const { transactionId } = req.params;
-    const { amount, description } = req.body;
+    const { title, amount, description } = req.body;
     const transactionIdAsLong = transactionId as unknown as Long;    
     try {
       const updatedTransaction =
         await UpdateTransactionService.updateTransactionService(
           userId,
           transactionIdAsLong,
+          title,
           amount,
           description
         );

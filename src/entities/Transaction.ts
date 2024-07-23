@@ -15,6 +15,9 @@ class Transaction {
   @PrimaryGeneratedColumn({ type: "bigint" })
   id: Long;
 
+  @Column({type: 'varchar', nullable: false})
+  title: string;
+
   @Column({ type: "text", nullable: false })
   description: string;
 

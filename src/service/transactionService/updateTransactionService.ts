@@ -8,6 +8,7 @@ class UpdateTransactionService {
   static async updateTransactionService(
     userId: Long,
     transactionId: Long,
+    title: string,
     amount: number,
     description: string,
   ) {  
@@ -18,6 +19,7 @@ class UpdateTransactionService {
     user.currentBalance = parseFloat(user.currentBalance.toString()) - transaction.amount;
     transaction.amount = amount;
     transaction.description = description;
+    transaction.title = title;
     user.currentBalance = parseFloat(user.currentBalance.toString()) + parseFloat(amount.toString());
     await userRepository.save(user);
     

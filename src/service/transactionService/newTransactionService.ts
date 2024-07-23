@@ -6,7 +6,6 @@ import User from "../../entities/User";
 class NewTransactionService {
   static async newTransactionService(
     userId: Long,
-    title: string,
     description: string,
     amount: number
   ) {
@@ -14,7 +13,6 @@ class NewTransactionService {
     user.currentBalance = parseFloat(user.currentBalance.toString()) + parseFloat(amount.toString());
     await userRepository.save(user);    
     const newTransaction = transactionRepository.create({
-      title,
       description,
       amount,
       user,

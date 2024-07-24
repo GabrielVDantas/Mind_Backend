@@ -15,7 +15,6 @@ class NewTransactionService {
     category: string
   ) {
     const user = (await userRepository.findOneBy({ id: userId })) as User;
-    console.log(type);
     if (type === "despesa") {
       amount = -Math.abs(amount)
     }    

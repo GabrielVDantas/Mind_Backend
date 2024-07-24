@@ -20,7 +20,7 @@ class UpdateUserController {
       );
       res.json({
         message: "Informação do usuário alterada com sucesso!",
-        updatedUser: updatedUser,
+        user: updatedUser,
       });
     } catch (error) {
       res.status(500).json({ message: `Erro: ${error}` });

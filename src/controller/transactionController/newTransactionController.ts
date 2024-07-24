@@ -5,10 +5,10 @@ import { Long } from "typeorm";
 class NewTransactionController {
   static async newTransactionController(req: Request, res: Response) {
     const userId = req.user.id as Long;
-    const { description, amount, category } = req.body;
+    const { description, amount, type, category } = req.body;
     try {
       const newTransaction =
-        await NewTransactionService.newTransactionService(userId, description, amount, category);
+        await NewTransactionService.newTransactionService(userId, description, amount, type, category);
       res.status(201).json({
         message: "Transação registrada com sucesso!",
         transaction: newTransaction,

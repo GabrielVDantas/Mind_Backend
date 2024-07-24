@@ -10,6 +10,11 @@ import {
 import User from "./User";
 import Category from "./Category";
 
+export enum TransactionType {
+  EXPENSE = "despesa",
+  INCOME = "reserva",
+}
+
 @Entity("transactions")
 class Transaction {
   @PrimaryGeneratedColumn({ type: "bigint" })
@@ -23,6 +28,9 @@ class Transaction {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ type: "enum", enum: TransactionType })
+  type: TransactionType;
 
   @ManyToOne(() => User, (user) => user.transactions)
   @JoinColumn({ name: "user_id" })

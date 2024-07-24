@@ -12,7 +12,7 @@ class UpdateTransactionService {
     transactionId: Long,
     amount: number,
     description: string,
-    category: string
+    category: string,
   ) {  
     const user = await userRepository.findOneBy({ id: userId }) as User;
     const transaction = await transactionRepository.findOne({
@@ -27,7 +27,6 @@ class UpdateTransactionService {
     transaction.category = dbCategory;
     const transactionUpdated = await transactionRepository.save(transaction);
     return transactionUpdated;
-    
   }
 }
 

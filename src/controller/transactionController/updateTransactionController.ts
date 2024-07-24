@@ -16,7 +16,7 @@ class UpdateTransactionController {
           transactionIdAsLong,
           amount,
           description,
-          category
+          category,
         );
       res.json({
         message: "Transação atualizada com sucesso!",
